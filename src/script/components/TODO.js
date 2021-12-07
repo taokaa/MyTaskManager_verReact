@@ -1,49 +1,52 @@
 import React from 'react';
 
 const list = [];
+let ID = 0;
 
 class TODO extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {todo: ''};
+        this.state = {id: '', value: ''};
     }
 
-    handleChange(value) {
-        this.setState({todo: value});
-        console.log(value);
+    handleChange(Value) {
+        this.setState({id: ID, value: Value});
+        console.log('handleChange'+ID+Value);
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        this.setState({todo: ''})
+        this.setState({id: '', value: ''});
+        ID++;
     }
 
-    listItems(item) {
-        list.push(item);
+    listItems(object) {
+        list.push(object);
+        console.log(list);
     }
 
     render() {
         return(
             <div>
                 <h1>
-                    This is NOT TODO list
+                    This is ONLY ADD TODO list
                 </h1>
                 <form onSubmit={(e) => {
-                    this.listItems(this.state.todo)
+                    this.listItems(this.state)
+                    console.log(this.state)
                     this.handleSubmit(e)
                 }}>
                     <input
-                        value={this.state.todo} 
+                        value={this.state.value} 
                         onChange={(e) => {
                             this.handleChange(e.target.value)
-                            
                         }}
                     >
                     </input>
                     <button type>add task</button>
                     <ul>
                         {list.map((listItem) => {
-                            return <li key={listItem}>{listItem}</li>;
+                            return <li key={listItem.id}>{listItem.value}</li>;
                         })}
                     </ul>
                 </form>
