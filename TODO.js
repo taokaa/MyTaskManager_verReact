@@ -44,6 +44,7 @@ class TODO extends React.Component {
                     >
                     </input>
                     <button type>add task</button>
+                    <h2>All Tasks</h2>
                     <ul>
                         {list.map((listItem) => {
                             return <li key={listItem.id}>{listItem.value}</li>;
